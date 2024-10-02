@@ -3,13 +3,107 @@
   --secondaryColor: rgba(100, 100, 100, 1);
   --primaryTextColor: rgb(0, 0, 0);
   --secondaryTextColor: rgb(255, 255, 255);
+  --greenBtn: rgb(81, 156, 71);
   --border: 2px solid red;
 }
 
 /* ---------------------------------------------
                     Navbar                     
 ------------------------------------------------ */
+nav {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  padding: 2rem;
+  justify-content: center;
+  font-size: 0.75rem;
+  width: 70%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0);
+  position: absolute;
+  top: 0;
+  z-index: 99;
+  color: var(--secondaryTextColor);
+}
 
+nav > .menu {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 1rem;
+  place-items: center;
+}
+
+nav > .menu a {
+  color: var(--secondaryTextColor);
+  text-decoration: none;
+}
+
+nav > .menu a::after {
+  content: "";
+  width: 100%;
+  display: block;
+  padding-top: 0.25rem;
+  transform-origin: left center;
+  transform: scaleX(0);
+  border-bottom: 1px solid var(--secondaryTextColor);
+  transition: all 100ms linear;
+  opacity: 0.5;
+}
+
+nav > .menu a:hover::after {
+  transform: scaleX(100%);
+}
+
+nav > .menu form {
+  position: relative;
+}
+
+nav > .menu form label {
+  width: 100%;
+}
+
+nav > .menu form input {
+  max-width: 0;
+  border: none;
+  min-height: 1.5rem;
+  color: var(--secondaryTextColor);
+  background-color: rgba(0, 0, 0, 0);
+  transition: max-width 500ms linear;
+  padding-left: 2rem;
+  transform: scale(0);
+}
+
+nav > .menu form input:focus {
+  max-width: 400px;
+  border-radius: 5px;
+  border: 2px solid var(--secondaryTextColor);
+  outline: none;
+  transform: scale(1);
+}
+
+nav > .menu form input:not(:empty) {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+nav > .menu form .svg {
+  min-width: 100%;
+}
+
+nav > .menu form .svg > img {
+  display: block;
+  position: absolute;
+  min-width: 20px;
+  min-height: 20px;
+  max-width: 20px;
+  max-height: 20px;
+  aspect-ratio: 1/1;
+  top: 0;
+  padding: 0.125rem;
+  margin-inline-start: 0.5rem;
+  transform: translateY(10%);
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(334deg);
+  cursor: pointer;
+}
 /* ---------------------------------------------
                     Header                     
 ------------------------------------------------ */
@@ -22,20 +116,17 @@ header {
   height: 80vh;
   padding: 2rem;
   position: relative;
-}
-
-header::before {
-  content: "";
-  width: 100%;
-  height: 100%;
-  position: absolute;
   background-color: var(--primaryColor);
-  background-image: url("../img/header.jpg");
+  background-image: linear-gradient(
+      to left,
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url("../img/header/header.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  filter: brightness(65%);
-  z-index: -1;
+  padding-block-start: 5rem;
 }
 
 header > .welcomeText {
@@ -53,12 +144,13 @@ header > .welcomeText > a {
   width: 10rem;
   height: 3rem;
   color: white;
-  background-color: rgb(104, 199, 91);
+  background-color: var(--greenBtn);
   text-decoration: none;
   font-weight: bold;
   justify-self: end;
   margin-top: 2rem;
   padding: 1rem;
+  border-radius: 5px;
 }
 
 header > .contactInfo {
@@ -77,10 +169,440 @@ header > .contactInfo > .list {
 }
 
 .list img {
+  padding: 0.125rem;
   display: inline-block;
   width: 40px;
   border-radius: 50%;
-  border: 2px solid white;
-  background-color: white;
+  border: 2px solid black;
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(334deg);
   aspect-ratio: 1/1;
+}
+
+/* ---------------------------------------------
+                   Content                     
+------------------------------------------------ */
+/* -----------About------------ */
+
+main {
+  width: 100%;
+}
+
+section[id="about"] {
+  padding-top: 5rem;
+  width: 70%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 1rem;
+}
+
+section[id="about"] > .about {
+  display: grid;
+  grid-auto-flow: row;
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+section[id="about"] > .about > .wrapper:nth-child(1) > p,
+section[id="portofolio"] > .wrapper > p,
+section[id="testimonials"] > .content > .container > .wrapper p,
+section[id="contact"] > .container > .extraContainer > .wrapper p {
+  font-size: 0.75rem;
+  letter-spacing: 0.5rem;
+  text-transform: uppercase;
+  color: var(--secondaryColor);
+}
+
+section[id="about"] > .picture {
+  padding: 1rem;
+}
+
+section[id="about"] > .picture > img {
+  display: block;
+  background-color: var(--primaryColor);
+  width: 100%;
+  aspect-ratio: 2/1.5;
+  object-fit: cover;
+}
+
+section[id="about"] > .about > .statistik {
+  display: grid;
+  grid-auto-flow: column;
+}
+
+section[id="services"] {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding-top: 5rem;
+}
+
+/* -----------Services------------ */
+
+section[id="services"] > .container {
+  display: grid;
+  gap: 1rem;
+  padding: 3rem 2rem;
+}
+
+section[id="services"] > .container:nth-child(1) {
+  background-color: rgba(211, 211, 211, 0.25);
+}
+section[id="services"] > .container:nth-child(2) {
+  background-color: rgba(211, 211, 211, 0.35);
+}
+section[id="services"] > .container:nth-child(3) {
+  background-color: rgba(211, 211, 211, 0.45);
+}
+
+section[id="services"] > .container img {
+  display: block;
+  width: 100px;
+  aspect-ratio: 1/1;
+  padding: 0.5rem 0.5rem 0.5rem 0;
+}
+
+section[id="services"] > .container p {
+  font-size: 0.75rem;
+  line-height: 1.15rem;
+}
+
+section[id="services"] > .container a,
+section[id="portofolio"] > a {
+  font-size: 0.5rem;
+  padding: 0.5rem 1rem;
+  width: fit-content;
+  text-decoration: none;
+  color: var(--primaryTextColor);
+  border: 2px solid var(--secondaryColor);
+  transition: all 100ms;
+}
+
+section[id="services"] > .container a:hover,
+section[id="portofolio"] > a:hover {
+  background-color: var(--greenBtn);
+  border: 2px solid var(--greenBtn);
+  color: var(--secondaryTextColor);
+}
+
+/* -----------Portofolio------------ */
+
+section[id="portofolio"] {
+  padding: 5rem 1rem 1rem 1rem;
+  width: 70%;
+  margin: auto;
+  display: grid;
+  gap: 0.5rem;
+}
+
+section[id="portofolio"] img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1/1;
+  background-color: var(--primaryColor);
+  object-fit: cover;
+}
+
+section[id="portofolio"] > .container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 1rem 1rem 1rem 0;
+}
+
+section[id="portofolio"] > .container > .content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 1rem 0 1rem 0;
+  gap: 1rem;
+}
+
+section[id="portofolio"] > .container > .content > .wrapper a {
+  width: fit-content;
+  display: block;
+  margin-top: 1.5rem;
+  color: var(--primaryTextColor);
+  text-decoration: none;
+  font-size: 0.75rem;
+  transition: all 100ms linear;
+}
+
+section[id="portofolio"] > .container > .content > .wrapper a::after {
+  content: "";
+  display: block;
+  width: 100%;
+  border-bottom: 2px solid var(--primaryTextColor);
+  transform-origin: left center;
+  transform: scaleX(0);
+  padding-top: 0.5rem;
+  transition: all 100ms linear;
+}
+
+section[id="portofolio"] > .container > .content > .wrapper a:hover::after {
+  transform: scaleX(100%);
+  opacity: 0.5;
+}
+
+section[id="portofolio"] > .container > .mainContent {
+  padding: 1rem 1rem 1rem 0;
+}
+
+section[id="portofolio"] > .container > .mainContent > img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: unset;
+}
+
+section[id="portofolio"] > a {
+  margin-top: 3rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+/* ------------Testimonies------------ */
+
+section[id="testimonials"] {
+  padding-top: 5rem;
+}
+section[id="testimonials"] > .content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  background-color: rgba(211, 211, 211, 0.15);
+}
+
+section[id="testimonials"] > .content > img {
+  display: block;
+  background-color: var(--primaryColor);
+  width: 100%;
+  aspect-ratio: 1.5/0.95;
+  object-fit: ccover;
+}
+
+section[id="testimonials"] > .content > .container {
+  display: grid;
+  grid-template-rows: max-content auto;
+  gap: 2rem;
+  padding: 3rem 1rem 3rem 0;
+}
+
+section[id="testimonials"] > .content > .container .content {
+  display: grid;
+  gap: 1rem;
+  overflow-y: hindden;
+}
+
+section[id="testimonials"] > .content > .container > .content .client {
+  display: grid;
+  gap: 1rem;
+  grid-template-rows: max-content max-content;
+  font-size: 0.75rem;
+}
+
+/* ------------Update------------ */
+
+section[id="update"] {
+  padding-top: 5rem;
+  display: grid;
+  gap: 3rem;
+  width: 70%;
+  margin: auto;
+}
+
+section[id="update"] > .container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  font-size: 0.75rem;
+}
+
+section[id="update"] > .container .content {
+  display: grid;
+  grid-template-columns: max-content auto;
+  gap: 1rem;
+}
+
+section[id="update"] > .container .content img {
+  display: block;
+  background-color: var(--primaryColor);
+  width: 100px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+
+section[id="update"] > .container .content .wrapper {
+  display: grid;
+  grid-template-rows: max-content max-content;
+  gap: 0.5rem;
+  align-self: center;
+}
+
+/* ------------Contact------------ */
+
+section[id="contact"] {
+  padding-top: 5rem;
+}
+
+section[id="contact"] > .container {
+  width: 100%;
+  background-color: rgba(211, 211, 211, 0.25);
+  padding: 5rem;
+}
+
+section[id="contact"] > .container > .extraContainer {
+  width: 70%;
+  margin: auto;
+  display: grid;
+  gap: 2rem;
+}
+
+section[id="contact"] > .container > .extraContainer > .content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+section[id="contact"] > .container > .extraContainer > .content .contact .list {
+  display: grid;
+  grid-template-rows: max-content max-content;
+  gap: 0.5rem;
+}
+
+section[id="contact"] > .container > .extraContainer > .content .contact {
+  display: grid;
+  gap: 1rem;
+  font-size: 0.75rem;
+}
+
+section[id="contact"]
+  > .container
+  > .extraContainer
+  > .content
+  .contact
+  .list
+  .wrapper {
+  display: grid;
+  grid-template-columns: max-content auto;
+  gap: 1rem;
+  align-items: center;
+}
+
+section[id="contact"]
+  > .container
+  > .extraContainer
+  > .content
+  .contact
+  .list
+  > .wrapper
+  > img {
+  filter: invert(0%) sepia(0%) saturate(9%) hue-rotate(239deg) brightness(100%)
+    contrast(100%);
+  width: 25px;
+  border-radius: 0;
+  border: 0;
+}
+
+section[id="contact"] > .container > .extraContainer > .content > form {
+  display: grid;
+  gap: 1rem;
+}
+
+section[id="contact"]
+  > .container
+  > .extraContainer
+  > .content
+  > form
+  > button {
+  width: 20%;
+  font-size: 0.75rem;
+  background-color: var(--greenBtn);
+  border: none;
+  color: var(--secondaryTextColor);
+  padding: 0.5rem;
+}
+
+section[id="contact"]
+  > .container
+  > .extraContainer
+  > .content
+  > form
+  .container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+section[id="contact"]
+  > .container
+  > .extraContainer
+  > .content
+  > form
+  .container
+  input {
+  width: 100%;
+  height: 2rem;
+  padding: 1rem;
+  font-size: 0.75rem;
+}
+
+section[id="contact"]
+  > .container
+  > .extraContainer
+  > .content
+  > form
+  textarea {
+  resize: none;
+  width: 100%;
+  height: 10ch;
+  padding: 1rem;
+  font-size: 0.75rem;
+}
+
+/* ---------------------------------------------
+                   Footer                     
+------------------------------------------------ */
+
+footer {
+  background-color: var(--secondaryColor);
+  background-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.25),
+    rbga(0, 0, 0, 0)
+  );
+  color: rgba(255, 255, 255, 0.5);
+  height: 15rem;
+}
+
+footer > .container {
+  width: 70%;
+  margin: auto;
+  padding: 3rem 0;
+  display: grid;
+  gap: 1rem;
+  height: 100%;
+  align-items: center;
+}
+
+footer img {
+  display: block;
+  width: 20px;
+  height: 20px;
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(334deg);
+  opacity: 0.5;
+}
+
+footer > .container .wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+footer > .container .wrapper > .menu,
+footer > .container .wrapper > .socialMedia {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 1rem;
+  justify-self: end;
+}
+
+footer > .container .wrapper > .menu a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.5);
 }
